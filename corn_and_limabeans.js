@@ -5,3 +5,15 @@ data = JSON.parse(dataStr);
 for(i in data){
   console.log(data[i]);
 };
+
+function minors(data) {
+    return data.filter(function(n) {
+	return n.age <= 17;
+    }).map(function(n) {
+	return n.total;
+    }).reduce(function(a, b) {
+	return a + b;
+    });
+}
+
+console.log(minors(data));
