@@ -15,7 +15,7 @@ for(i in data){
 };
 
 //returns total # of people under age 18
-var minors = function(data) {
+var minors = function() {
     return data.filter(function(n) { //filter only age groups <= 17
 	return n.age <= 17;
     }).map(function(n) { //get total value for each age group
@@ -25,9 +25,9 @@ var minors = function(data) {
     });
 };
 
-console.log(minors(data));
+//console.log(minors(data));
 
-var getMed = function(data){
+var getMed = function(){
     var ages = data.map(function(n){ return n["total"];});
     var otherage = data.map(function(n){ return n["total"];});
 
@@ -43,10 +43,10 @@ var getMed = function(data){
     return otherage.indexOf(medtotal);
 };
 
-console.log(getMed(data));
+//console.log(getMed(data));
 
 //returns array of gender % makeup [male%, female%]
-var percentGender = function(data) {
+var percentGender = function() {
     //get male total
     var males = data.map(function(n) { //get numbers for each age group male
 	return n.males;
@@ -68,6 +68,24 @@ var percentGender = function(data) {
     return [males / total, females / total];
 };
 
-console.log(percentGender(data));
+//console.log(percentGender(data));
 
-document.getElementsById("body").appendChild(document.createElement("p"));
+prgdr = percentGender(data);
+
+var stat = document.getElementById("stats");
+
+var minor = document.createElement("h5");
+minor.innerHTML = "The number of minors was: " + minors();
+stats.appendChild(minor);
+
+var med = document.createElement("h5");
+med.innerHTML = "The median age was: " + getMed();
+stats.appendChild(med);
+
+var gendperm = document.createElement("h5");
+gendperm.innerHTML = "The percentage of males was: " + prgdr[0]*100 + "%";
+stats.appendChild(gendperm);
+
+var gendperf = document.createElement("h5");
+gendperf.innerHTML = "The percentage of females was: " + prgdr[1]*100 + "%";
+stats.appendChild(gendperf);
