@@ -14,12 +14,13 @@ for(i in data){
   console.log(data[i]);
 };
 
+//returns total # of people under age 18
 var minors = function(data) {
-    return data.filter(function(n) {
+    return data.filter(function(n) { //filter only age groups <= 17
 	return n.age <= 17;
-    }).map(function(n) {
+    }).map(function(n) { //get total value for each age group
 	return n.total;
-    }).reduce(function(a, b) {
+    }).reduce(function(a, b) { //sum list
 	return a + b;
     });
 };
@@ -43,3 +44,30 @@ var getMed = function(data){
 };
 
 console.log(getMed(data));
+
+//returns array of gender % makeup [male%, female%]
+var percentGender = function(data) {
+    //get male total
+    var males = data.map(function(n) { //get numbers for each age group male
+	return n.males;
+    }).reduce(function(a, b) { //sum list
+	return a + b;
+    });
+    //get female total
+    var females = data.map(function(n) { //get numbers for each sge group female
+	return n.females;
+    }).reduce(function(a, b) { //sum list
+	return a + b;
+    });
+    //get total
+    var total = data.map(function(n) { //get numbers for each age group total
+	return n.total;
+    }).reduce(function(a, b) { //sum list
+	return a + b;
+    });
+    return [males / total, females / total];
+};
+
+console.log(percentGender(data));
+
+document.getElementsById("body").appendChild(document.createElement("p"));
